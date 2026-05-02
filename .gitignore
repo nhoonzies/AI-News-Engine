@@ -1,0 +1,4 @@
+.env
+vendor/
+scheduler_status.json
+composer.lock
