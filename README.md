@@ -1,5 +1,5 @@
 # ⚙️ AI Newsletter Engine
-An automated data pipeline built with PHP that aggregates news from multiple Philippine sources (YugaTech, Philstar, ABS-CBN) and uses the **Gemini 2.5 Flash** LLM to draft professional newsletters.
+An automated data pipeline built with PHP that aggregates news from multiple Philippine sources (YugaTech, Philstar, ABS-CBN) and uses the **Gemini 2.5 Flash Lite** LLM to draft professional newsletters.
 
 ## 🚀 Features
 - **Dynamic Aggregation**: Fetches and balances up to 6 articles across selected RSS feeds.
