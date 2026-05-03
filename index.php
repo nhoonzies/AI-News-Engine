@@ -40,7 +40,7 @@ if (isset($_POST['update_time'])) {
 $availableSources = [
     'yugatech' => ['name' => 'YugaTech', 'url' => 'https://www.yugatech.com/feed/'],
     'philstar' => ['name' => 'Philstar Headlines', 'url' => 'https://www.philstar.com/rss/headlines'],
-    'abscbn'   => ['name' => 'ABS-CBN News', 'url' => 'https://news.abs-cbn.com/rss/news']
+    'abscbn'   => ['name' => 'ABS-CBN News', 'url' => 'https://news.google.com/rss/search?q=site:news.abs-cbn.com&hl=en-PH&gl=PH&ceid=PH:en']
 ];
 
 // Default UI States
@@ -106,6 +106,7 @@ if (isset($_POST['run_engine']) || isset($_GET['automate'])) {
                 // 3. AI Draft - Strict Prompt to stop placeholders and filler
                 $apiKey = $_ENV['GEMINI_API_KEY'];
                 $client = new \GuzzleHttp\Client();
+                
                 $promptText = "You are an expert newsletter editor for the Philippine market, contextualized specifically for local businesses, tech professionals, and freelancers.
                 Your final output must strictly follow a professional, highly readable format with clear indentation and vertical spacing.
 
@@ -158,7 +159,9 @@ if (isset($_POST['run_engine']) || isset($_GET['automate'])) {
                 $mail->isHTML(true);
                 $subjectTag = (count($fetchedNames) > 1) ? "Multi-Source" : $fetchedNames[0];
                 $mail->Subject = "🚀 PH News Digest [$subjectTag]: " . date('M d');
-                $mail->Body = "<div style='font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto;'>" . $htmlContent . "</div>";
+                
+                // CSS FIX: Added overflow-wrap to force long Google News URLs to break correctly in the email
+                $mail->Body = "<div style='font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; overflow-wrap: break-word; word-break: break-word;'>" . $htmlContent . "</div>";
 
                 $mail->send();
                 $emailStatus = "<span class='badge success'>Sent to " . htmlspecialchars($targetEmail) . "</span>";
@@ -240,7 +243,9 @@ if (isset($_POST['run_engine']) || isset($_GET['automate'])) {
         .btn:hover { background-color: #2ea043; transform: translateY(-1px); }
         
         .log-box { background-color: #010409; font-family: 'Courier New', monospace; padding: 15px; border-radius: 6px; border: 1px solid var(--border); color: var(--text-muted); line-height: 1.4; margin-top: 10px;}
-        .preview-box { background-color: #ffffff; color: #333; padding: 30px; border-radius: 6px; margin-top: 15px; border: 1px solid var(--border); }
+        
+        /* CSS FIX: Added overflow-wrap to fix URL bleeding */
+        .preview-box { background-color: #ffffff; color: #333; padding: 30px; border-radius: 6px; margin-top: 15px; border: 1px solid var(--border); overflow-wrap: break-word; word-break: break-word; }
     </style>
 </head>
 <body>
