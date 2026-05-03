@@ -20,3 +20,10 @@ An automated data pipeline built with PHP that aggregates news from multiple Phi
    GEMINI_API_KEY=your_key_here
    SENDER_EMAIL=your_gmail@gmail.com
    GMAIL_APP_PASSWORD=your_app_password
+
+## UI:
+<img width="1173" height="816" alt="image" src="https://github.com/user-attachments/assets/e2c9f499-0756-4305-ab18-e9c6fd366d22" />
+
+## Result: 
+<img width="1588" height="740" alt="image" src="https://github.com/user-attachments/assets/53983bff-f8d9-4876-8dd6-af7652107b3a" />
+
